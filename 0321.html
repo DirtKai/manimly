@@ -1,0 +1,166 @@
+<html>
+
+<head>
+  <title>blockly test</title>
+  <script src="../../blockly_compressed.js"></script>
+  <script src="../../blocks_compressed.js"></script>
+  <script src="../../javascript_compressed.js"></script>
+  <script src="../../msg/js/en.js"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+
+    table {
+      height: 100%;
+      width: 100%;
+    }
+
+    #blocklyArea {
+      height: 99%;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="width: 100%">
+    <div id="blocklyDiv"
+        style="display: inline-block; height: 100%; width: 58%">
+      </div>
+    <textarea id="output" disabled="disabled"
+        style="display: inline-block; height: 100%; width: 38%;">
+        nothing
+    </textarea>
+  </div>
+
+
+  <div id="blocklyDiv" style="position: absolute"></div>
+  <div id="textarea" style="position: absolute"></div>
+
+  <script>
+    var toolbox = {
+      "kind": "categoryToolbox",
+      "contents": [
+        {
+          "kind": "category",
+          "name": "Control",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "controls_if"
+            },
+          ]
+        },
+        {
+          "kind": "category",
+          "name": "Logic",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "logic_compare"
+            },
+            {
+              "kind": "block",
+              "type": "logic_operation"
+            },
+            {
+              "kind": "block",
+              "type": "logic_boolean"
+            }
+          ]
+        }
+      ]
+    };
+      //var workspace = Blockly.inject('blocklyDiv', {toolbox: toolbox});
+  </script>
+
+  <!-- <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="controls_repeat_ext"></block>
+      <block type="math_number">
+        <field name="NUM">123</field>
+      </block>
+      <block type="math_arithmetic"></block>
+      <block type="text"></block>
+      <block type="text_print"></block>
+      <block type="controls_whileUntil"></block>
+    </xml> -->
+
+  <script>
+    var blocklyArea = document.getElementById('blocklyArea');
+    var blocklyDiv = document.getElementById('blocklyDiv');
+    var outputArea = document.getElementById('output');
+    var workspace = Blockly.inject(blocklyDiv,
+      { toolbox: toolbox,
+        grid: {
+          spacing: 20,
+          length: 3,
+          colour: '#ccc',
+          snap: true
+          },
+          trashcan: true,
+        move: {
+          scrollbars: {
+            horizontal: true,
+            vertical: true
+            },
+        drag: true,
+        wheel: false},
+        zoom: {
+          controls: true,
+          wheel: true,
+          startScale: 1.0,
+          maxScale: 3,
+          minScale: 0.3,
+          scaleSpeed: 1.2,
+          pinch: true
+          },
+        trashcan: true});
+    var onresize = function (e) {
+      // Compute the absolute coordinates and dimensions of blocklyArea.
+      var element = blocklyArea;
+      var x = 0;
+      var y = 0;
+      //do {
+      //x += element.offsetLeft;
+      //y += element.offsetTop;
+      //element = element.offsetParent;
+      //} while (element);
+      // Position blocklyDiv over blocklyArea.
+      blocklyDiv.style.left = x + 'px';
+      blocklyDiv.style.top = y + 'px';
+      //blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+      //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+      Blockly.svgResize(workspace);
+    };
+    window.addEventListener('resize', onresize, false);
+
+
+    onresize();
+    Blockly.svgResize(workspace);
+    function myUpdateFunction(event) {
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      //alert("code");
+      document.getElementById('output').value = code;
+      }
+      
+    workspace.addChangeListener(myUpdateFunction);
+  </script>
+
+</body>
+
+</html>
