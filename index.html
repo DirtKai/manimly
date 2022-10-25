@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>demo</title>
+        <script src="./blockly/blockly_compressed.js"></script>
+        <script src="./blockly/blocks_compressed.js"></script>
+        <script src="./blockly/msg/js/en.js"></script>
+        <script src="./blockly/python_compressed.js"></script>
+
+        <script src="./manim_js/START.js"></script>
+        <script src="./manim_js/CreatMobject.js"></script>
+        <script src="./manim_js/Animation.js"></script>
+        
+        <script>
+            var init_dom = Blockly.Xml.workspaceToDom(demoWorkspace)
+        </script>
+        <script src="./buttom.js"></script>
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+            }
+            body {
+                background-color: #fff;
+                font-family: sans-serif;
+                overflow: hidden;
+            }
+            button{
+                height: 40px;
+                width: 150px;
+            }
+            name {
+                color: red;
+                font-size: 60px;
+            }
+            ty {
+                font-size: 20px;
+            }
+            #blocklyArea {
+                height: 80%;
+                width: 50%;
+            }
+            #code {
+                height: 100%;
+                width: 100%;
+                font-size: xx-large;
+            }
+            #headANDbuttom{
+                height: 5%;
+                width: 100%;
+            }
+            #area{
+                height:80%;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+        <td id = "headANDbuttom"><p><name> &nbsp Manimly</name></p></td>
+        <td><button onclick="clear_dom()">clear</button></td>
+        <td><button onclick="open_dom()">open</button></td>
+        <td><button onclick="save_dom()">save</button></td>
+        <td><button onclick="output_low()">preview</button></td>
+        <td><button onclick="output_high()">output</button></td>
+        </table>
+        <table id = area>
+            <tr>
+                <td id = "blocklyArea">
+                    
+                </td>
+                <td id = "codeArea">
+                    <textarea id = "code" style="resize: none; vertical-align: auto;" readonly></textarea>
+                </td>
+            </tr>
+        </table>
+        <p> &nbsp This a demo for manimly, Github : <a href="https://github.com/DirtKai/manimly">https://github.com/DirtKai/manimly</a>, <br> &nbsp mail: kai15252987206@gmail.com/202021111060@njtech.edu.cn</p>
+        
+        <div id="blocklyDiv" style="position: absolute"></div>
+        
+        <script src = "./manim_js/toolbox.js"></script>
+        <script src = "./manim_js/inject.js"></script>
+        <script src = "./manim_js/update.js"></script>
+    </body>
+</html>
